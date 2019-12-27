@@ -1,0 +1,144 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static "css/custom.css" %}" rel="stylesheet" />
+    <title>emol-work-clone</title>
+    <style>
+      body{padding-top:90px}
+      @media (min-width:768px){body{padding-top:0}}
+      /* @media (min-width:768px){body{margin-left:232px}} */
+      .navbar.fixed-left{position:fixed;top:64px;left:0;right:0;z-index:1030}
+      @media (min-width:768px){.navbar.fixed-left{bottom:0;width:232px;flex-flow:column nowrap;align-items:flex-start}
+      .navbar.fixed-left .navbar-collapse{flex-grow:0;flex-direction:column;width:100%}
+      .navbar.fixed-left .navbar-collapse .navbar-nav{flex-direction:column;width:100%}
+      .navbar.fixed-left .navbar-collapse .navbar-nav .nav-item{width:100%}
+      .navbar.fixed-left .navbar-collapse .navbar-nav .nav-item .dropdown-menu{top:0}}
+      @media (min-width:768px){.navbar.fixed-left{right:auto}
+      .navbar.fixed-left .navbar-nav .nav-item .dropdown-toggle:after{border-top:.3em solid transparent;border-left:.3em solid;border-bottom:.3em solid transparent;border-right:none;vertical-align:baseline}
+      .navbar.fixed-left .navbar-nav .nav-item .dropdown-menu{left:100%}}
+      .content{position:absolute; left:230px; padding:2em; width:100%;}
+      .header{z-index: 2000; position: relative;}
+      .logo{max-width: 160px;}
+      .navbar{background-color: #1a2b3e!important;}
+      .user_thumbnail img{max-width: 40%; border-radius: 100px; display: table-cell; vertical-align: middle;}
+      .user_name{color:white; text-align: center;}
+    </style>
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm header">
+    <div class="my-0 mr-md-auto font-weight-normal">
+      <img src="{% static "images/logo.png" %}" class="logo">
+    </div>
+
+
+    <nav class="my-2 my-md-0 mr-md-3">
+    {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'accounts:profile' %}">マイページ</a>
+    {% else %}
+        <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'login' %}">ログイン</a>
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:signup' %}">新規登録</a>
+    {% endif %}
+    </nav>
+</div>
+
+
+
+
+
+<div class="container mt-3">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-left">
+    <div class="user_info">
+
+				<div class="user_thumbnail">
+          <img src="{% static "images/icon.png" %}">
+        </div>
+
+				<p class="user_name">
+                    test
+                </p>
+			</div>
+      <a class="navbar-brand" href="">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link">ダッシュボード</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link">メンタルトレーニング</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link">ウェルビーイング診断</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link">slack診断</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link">設定</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link">メンバー管理</a>
+              </li>
+              <!-- <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item">Action</a>
+                      <a class="dropdown-item">Another action</a>
+                      <a class="dropdown-item">Something else here</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item">Separated link</a>
+                      <a class="dropdown-item">One more separated link</a>
+                  </div>
+              </li> -->
+          </ul>
+          <!-- <ul class="navbar-nav">
+              <li class="nav-item active">
+                  <a class="nav-link active" data-class="fixed-left">
+                      <i class="fa fa-arrow-left"></i>
+                      Fixed Left
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-class="fixed-top">
+                      <i class="fa fa-arrow-up"></i>
+                      Fixed Top
+                      <small>(original)</small>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-class="fixed-right">
+                      <i class="fa fa-arrow-right"></i>
+                      Fixed Right
+                  </a>
+              </li>
+          </ul> -->
+      </div>
+  </nav>
+  <div class="content">
+    {% block body %}{% endblock %}
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
